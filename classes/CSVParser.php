@@ -18,17 +18,15 @@ class CSVParser
     public function parse()
     {
         if (! file_exists($this->filename)) {
-            return false;
+            throw new FileNotFoundException("File {$this->filename} does not exists");
         }
 
         if (! is_readable($this->filename)) {
-            return false;
+            throw new FilePermissionException("File {$this->filename} is not readable");
         }
 
         $this->data = file($this->filename);
         $this->header = str_getcsv($this->data[0], $this->separator);
-
-        return true;
     }
 
     public function fetch()
