@@ -17,6 +17,14 @@ class CSVParser
 
     public function parse()
     {
+        if (! file_exists($this->filename)) {
+            exit("File {$this->filename} does not exists");
+        }
+
+        if (! is_readable($this->filename)) {
+            exit("File {$this->filename} is not readable");
+        }
+
         $this->data = file($this->filename);
         $this->header = str_getcsv($this->data[0], $this->separator);
     }
