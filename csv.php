@@ -3,9 +3,12 @@
 require_once 'classes/CSVParser.php';
 
 $csv = new CSVParser('customers.csv', ';');
-$csv->parse();
+if ($csv->parse()) {
 
-while ($row = $csv->fetch()) {
-    echo $row['Name'].' - ';
-    echo $row['City'].PHP_EOL;
+    while ($row = $csv->fetch()) {
+        echo $row['Name'].' - ';
+        echo $row['City'].PHP_EOL;
+    }
+} else {
+    echo 'ERROR reading file!'.PHP_EOL;
 }
